@@ -1,15 +1,19 @@
+PImage nebula;
+
 void Win() {
-  background(0, 255, 0);
+  nebula = loadImage("nebula.jpg");
+  image(nebula, width/2, height/2, 1000, height);  
+  
   //INSERT RESTART BUTTON
-  button(400, 600, 200, 100, 40, "RESTART");  
+  button(400, 600, 260, 100, 30, "RESTART");  
   
   //INSERT X BUTTON
   button(770, 30, 40, 40, 20, "X");
   
   //TEXT
   fill(255);
-  textSize(90);
-  text("YOU WIN", width/2, height/4);
+  textSize(100);
+  text("YOU WIN!", width/2, height/3);
 }
 
 

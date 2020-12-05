@@ -5,7 +5,7 @@ void Game() {
   background(0);
   
   //INSERT PAUSE BUTTON
-  button(757, 24, 80, 40, 20, "PAUSE");  
+  button(740, 40, 90, 50, 20, "PAUSE");  
   
   
   //SPACESHIP ACTIONS

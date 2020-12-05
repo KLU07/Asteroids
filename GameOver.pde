@@ -1,8 +1,11 @@
+PImage blackhole;
+
 void GameOver() {
-  background(255, 0, 0);
+  blackhole = loadImage("blackhole.png");
+  image(blackhole, width/2, height/2, width, height);  
   
   //INSERT RESTART BUTTON
-  button(400, 600, 200, 100, 40, "RESTART");  
+  button(400, 600, 260, 100, 40, "RESTART");  
   
   //INSERT X BUTTON
   button(770, 30, 40, 40, 20, "X");
@@ -17,7 +20,7 @@ void GameOver() {
 
 void GameOverClicks() {
   //IF CLICKING RESTART BUTTON, GO TO GAME SCREEN
-  if (touchingMouse(400, 600, 200, 100)) {
+  if (touchingMouse(400, 600, 260, 100)) {
     mode = INTRO;
     setup();
   }

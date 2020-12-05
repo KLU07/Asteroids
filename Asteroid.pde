@@ -26,8 +26,8 @@ class Asteroid extends GameObject {
     
     textSize(30);
     fill(255);    
-    strokeWeight(1);
-    text("Score:" + myShip.score, 80, 90);
+    strokeWeight(0);
+    text("Score: " + myShip.score, 95, 90);
   }
   
   

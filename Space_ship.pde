@@ -5,6 +5,8 @@ Asteroid myAsteroid;
 
 ArrayList<GameObject> myObjects;
 
+ArrayList<PImage> gif;
+
 boolean wkey, akey, skey, dkey, spacekey;
 
 color r = #CB1925; //red
@@ -26,12 +28,17 @@ final int GAMEOVER = 3;
 final int WIN = 4;
 int mode = INTRO;
 
+PFont font;
+
 
 void setup() {
   size(800, 800);
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER, CENTER);
+  
+  font = createFont("ASTERA v2.ttf", 32);
+  textFont(font);
   
   myShip = new Spaceship();
   myAsteroid = new Asteroid();
@@ -47,6 +54,7 @@ void setup() {
   
   myObjects.add(new UFO());
   
+  gif = new ArrayList<PImage>();
 }
 
 

@@ -23,7 +23,7 @@ void button(int x, int y, int w, int h, String label) {
 void button(int x, int y, int w, int h, int size, String label) {
    //MAKE START BUTTON TACTILE - CHECK IF MOUSE IS WITHIN BUTTON PERAMETERS
   if(touchingMouse(x, y, w, h)) {
-    stroke(lightblue);
+    stroke(0);
     strokeWeight(5);
   } else {
     stroke(0);

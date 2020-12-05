@@ -78,7 +78,7 @@ class UFO extends GameObject {
 
   
     //TELEPORTS WHEN OFFSCREEN
-    while (timer >= 100) {
+    if (timer >= 100) {
     if (location.x < -50) location.x = 850; 
     if (location.x > 850) location.x = -50;
     if (location.y < -50) location.y = 850;

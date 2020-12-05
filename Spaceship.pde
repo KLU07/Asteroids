@@ -5,7 +5,9 @@ class Spaceship extends GameObject{
   PVector direction;
   int shotTimer, threshold;
   int score;
-  int invincible;
+  
+  boolean invincible;
+  int invincibleTimer;
   
   PImage ship;
 
@@ -20,7 +22,9 @@ class Spaceship extends GameObject{
     shotTimer = 0;
     threshold = 40;
     score = 0;
-    invincible = 0;
+    
+    invincibleTimer = 250;
+    invincible = false;
    
     ship = loadImage("ship.png");
 
@@ -29,11 +33,18 @@ class Spaceship extends GameObject{
   
   //3. behaviour functions - show and act
   void show() {
-    if (invincible >= 0) {
+    if (invincible == true) {
       stroke(255);
       noFill();
-      ellipse(location.x, location.y, 2*size, 2*size);
+      strokeWeight(4);
+      ellipse(location.x, location.y, size*1.8, size*1.8);
     }
+    
+    if (invincibleTimer <= 0) {
+      invincibleTimer = 250;
+      invincible = false;
+    }
+    
      pushMatrix();
      translate(location.x, location.y);
      rotate(direction.heading());
@@ -42,8 +53,8 @@ class Spaceship extends GameObject{
      
     textSize(30);
     fill(255);
-    strokeWeight(1);
-    text("Lives:" + lives, 80, 40);
+    strokeWeight(2);
+    text("Lives: " + lives, 90, 40);
 
      
   }
@@ -51,7 +62,8 @@ class Spaceship extends GameObject{
   void act() {
    super.act();
    shotTimer = shotTimer + 1;
-   invincible = invincible - 1;
+   invincibleTimer = invincibleTimer - 1;
+
 
   
   //ROTATE WHEN PRESSING A OR D KEYS 
@@ -70,7 +82,8 @@ class Spaceship extends GameObject{
     shotTimer = 0;
   }
   
-    //COLLISION WITH ASTEROID
+    //COLLISION WITH ASTEROID/UFO/UFOBULLET
+    if (invincible == false) {
     int i = 0;
     while (i < myObjects.size()) {
       GameObject obj = myObjects.get(i);
@@ -80,44 +93,33 @@ class Spaceship extends GameObject{
           location.x = width/2;
           location.y = height/2;
           velocity.x = 0;
-          velocity.y = 0;         
+          velocity.y = 0;   
+          invincible = true;
+          
         }
+      } else if (obj instanceof UFO) {
+          if (dist(location.x, location.y, obj.location.x, obj.location.y) <= size/2 + obj.size/2) { 
+            lives = lives - 1;
+             location.x = width/2;
+            location.y = height/2;
+            velocity.x = 0;
+            velocity.y = 0;
+            invincible = true;    
+          }
+      } else if (obj instanceof UFObullet) {
+          if (dist(location.x, location.y, obj.location.x, obj.location.y) <= size/2 + obj.size/2) { 
+            lives = lives - 1;
+            location.x = width/2;
+            location.y = height/2;
+            velocity.x = 0;
+            velocity.y = 0;
+            invincible = true;
+          }      
       }
       i = i + 1;
     }
-    
-    //COLLISION WITH UFO
-    int l = 0;
-    while (l < myObjects.size()) {
-      GameObject obj = myObjects.get(l);
-      if (obj instanceof UFO) {
-        if (dist(location.x, location.y, obj.location.x, obj.location.y) <= size/2 + obj.size/2) { 
-          lives = lives - 1;
-          location.x = width/2;
-          location.y = height/2;
-          velocity.x = 0;
-          velocity.y = 0;
-        }
-      }
-      l = l + 1;
-    }
-    
-    //COLLISION WITH UFO BULLET
-    int u = 0;
-    while (u < myObjects.size()) {
-      GameObject obj = myObjects.get(u);
-      if (obj instanceof UFObullet) {
-        if (dist(location.x, location.y, obj.location.x, obj.location.y) <= size/2 + obj.size/2) { 
-          lives = lives - 1;
-          location.x = width/2;
-          location.y = height/2;
-          velocity.x = 0;
-          velocity.y = 0;
+   }
 
-        }
-      }
-      u = u + 1;
-    }    
 
     
     if (lives <= 0) { 
