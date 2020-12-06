@@ -1,16 +1,10 @@
 class UFO extends GameObject {
-  //SHOULD USE PVECTORS, NOT VX, VY
-  //1. spawns on edge of screen and goes across screen
-  //2. aims and shoots at spaceship
-  //3. will respawn once in a while - random/timer 
-  //crashing into asteroid will lose a life
-  
-   //1. instance variables
-  //float x, y;
+  //1. instance variables
   PVector direction;
   PImage ufo;
   int shotTimer, threshold;
-  int timer;
+  int spawnTimer;
+  boolean spawn;
   
   
   //2. constructor
@@ -23,9 +17,18 @@ class UFO extends GameObject {
     
     shotTimer = 0;
     threshold = 30;
-    timer = 0;
+    spawnTimer = 100;
+    spawn = false;
     
-    ufo = loadImage("ufo3.png");
+    //if (spawn == true) {
+    ufo = loadImage("ufo.png");
+    //}
+    
+    if (spawnTimer <= 0) {
+      spawnTimer = 100;
+      spawn = false;
+    
+    }
     
     PVector direction = new PVector(myShip.location.x - location.x, myShip.location.y - location.y);
     direction.setMag(4);
@@ -33,8 +36,6 @@ class UFO extends GameObject {
     velocity.y = direction.y;
     
     location.x = location.x + velocity.x;
-    
-
   }
   
   //3. behaviour functions - show and act
@@ -49,12 +50,10 @@ class UFO extends GameObject {
    
      shotTimer = shotTimer + 1;
      
-     timer = timer + 1;
-     
-    
-    
+     spawnTimer = spawnTimer - 1;
+         
     //COLLISION WITH BULLET
-    if (timer >= 200) {
+    if (spawn == false) {
     int i = 0;
     while (i < myObjects.size()) {
       GameObject obj = myObjects.get(i);
@@ -63,6 +62,8 @@ class UFO extends GameObject {
         if (dist(location.x, location.y, obj.location.x, obj.location.y) <= size/2 + obj.size) { 
           obj.lives = 0;
           lives = 0;
+          spawnTimer = 100;
+          spawn = true;
         }
       }
       i = i + 1;
@@ -71,18 +72,11 @@ class UFO extends GameObject {
         shotTimer = 0;
         myObjects.add(new UFObullet(location.x, location.y));
       }
-    }
-    
-    
-    
-
-  
-    //TELEPORTS WHEN OFFSCREEN
-    if (timer >= 100) {
-    if (location.x < -50) location.x = 850; 
-    if (location.x > 850) location.x = -50;
-    if (location.y < -50) location.y = 850;
-    if (location.y > 850) location.y = -50;
+      //TELEPORT WHEN OFFSCREEN
+      if (location.x < -50) location.x = 850; 
+      if (location.x > 850) location.x = -50;
+      if (location.y < -50) location.y = 850;
+      if (location.y > 850) location.y = -50;  
     }
   }
   

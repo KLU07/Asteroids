@@ -2,7 +2,7 @@ PImage nebula;
 
 void Win() {
   nebula = loadImage("nebula.jpg");
-  image(nebula, width/2, height/2, 1000, height);  
+  image(nebula, width/2, height/2, 1000, 1000);  
   
   //INSERT RESTART BUTTON
   button(400, 600, 260, 100, 30, "RESTART");  
@@ -19,7 +19,7 @@ void Win() {
 
 void WinClicks() {
   //IF CLICKING RESTART BUTTON, GO TO GAME SCREEN
-  if (touchingMouse(400, 600, 200, 100)) {
+  if (touchingMouse(400, 600, 260, 100)) {
     mode = INTRO;
     setup();
   }

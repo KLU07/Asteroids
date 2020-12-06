@@ -26,9 +26,7 @@ class Spaceship extends GameObject{
     invincibleTimer = 250;
     invincible = false;
    
-    ship = loadImage("ship.png");
-
-    
+    ship = loadImage("ship.png");   
   }
   
   //3. behaviour functions - show and act
@@ -54,18 +52,16 @@ class Spaceship extends GameObject{
     textSize(30);
     fill(255);
     strokeWeight(2);
-    text("Lives: " + lives, 90, 40);
-
-     
+    text("Lives: " + lives, 90, 40);  
   }
   
   void act() {
    super.act();
+   
    shotTimer = shotTimer + 1;
+   
    invincibleTimer = invincibleTimer - 1;
 
-
-  
   //ROTATE WHEN PRESSING A OR D KEYS 
   if (akey) direction.rotate(-radians(5) );
   if (dkey) direction.rotate(radians(5) );
@@ -95,7 +91,6 @@ class Spaceship extends GameObject{
           velocity.x = 0;
           velocity.y = 0;   
           invincible = true;
-          
         }
       } else if (obj instanceof UFO) {
           if (dist(location.x, location.y, obj.location.x, obj.location.y) <= size/2 + obj.size/2) { 
@@ -120,8 +115,6 @@ class Spaceship extends GameObject{
     }
    }
 
-
-    
     if (lives <= 0) { 
       mode = GAMEOVER;
       lives = 3;

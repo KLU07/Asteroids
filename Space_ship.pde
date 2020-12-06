@@ -5,8 +5,6 @@ Asteroid myAsteroid;
 
 ArrayList<GameObject> myObjects;
 
-ArrayList<PImage> gif;
-
 boolean wkey, akey, skey, dkey, spacekey;
 
 color r = #CB1925; //red
@@ -53,15 +51,10 @@ void setup() {
   myObjects.add(new Asteroid());
   
   myObjects.add(new UFO());
-  
-  gif = new ArrayList<PImage>();
 }
 
 
 void draw() {
-  background(0);
- 
-
   
   if (mode == INTRO) {
     Intro();
@@ -74,7 +67,7 @@ void draw() {
   } else if (mode == WIN) {
     Win();
   } else {
-    println("ERROR: Mode =" + mode);
+    println("ERROR: Mode = " + mode);
   }  
   
 }
