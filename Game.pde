@@ -34,7 +34,7 @@ void Game() {
 
 void GameClicks() {
   //IF PAUSE BUTTON CLICKED, GO TO PAUSE SCREEN
-  if (touchingMouse(757, 24, 80, 40)) {
+  if (touchingMouse(740, 40, 90, 50)) {
     mode = PAUSE;
   }
   

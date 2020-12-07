@@ -1,8 +1,17 @@
+PImage asteroid;
+
+
 void Pause() {
-  background(0);
+  asteroid = loadImage("asteroidbg.jpg");
+  image(asteroid, width/2, height/2, 1000, 1000);
   
   //INSERT CONTINUE BUTTON
-  button(400, 600, 260, 100, 30, "CONTINUE");
+  button(400, 600, 260, 100, 40, "CONTINUE");
+  
+  //PAUSED
+  fill(255);
+  textSize(100);
+  text("PAUSED", width/2, height/3);  
 }
 
 

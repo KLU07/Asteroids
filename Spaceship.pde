@@ -31,16 +31,12 @@ class Spaceship extends GameObject{
   
   //3. behaviour functions - show and act
   void show() {
+    //INVINCIBLE BUBBLE
     if (invincible == true) {
       stroke(255);
       noFill();
       strokeWeight(4);
-      ellipse(location.x, location.y, size*1.8, size*1.8);
-    }
-    
-    if (invincibleTimer <= 0) {
-      invincibleTimer = 250;
-      invincible = false;
+      ellipse(location.x, location.y, 90, 90);
     }
     
      pushMatrix();
@@ -61,23 +57,12 @@ class Spaceship extends GameObject{
    shotTimer = shotTimer + 1;
    
    invincibleTimer = invincibleTimer - 1;
+   
+    if (invincibleTimer <= 0) {
+      invincibleTimer = 250;
+      invincible = false;
+    }
 
-  //ROTATE WHEN PRESSING A OR D KEYS 
-  if (akey) direction.rotate(-radians(5) );
-  if (dkey) direction.rotate(radians(5) );
-  //GO FORWARD/BACKWARDS WHEN PRESSING W OR S KEYS
-  if (wkey) { 
-    velocity.add(direction);
-    myObjects.add(new Fire());
-    myObjects.add(new Fire());
-  }
-  if (skey) velocity.sub(direction);
-  //SHOOT BULLETS WHEN PRESSING SPACE KEY
-  if (spacekey && shotTimer >= threshold) {
-    myObjects.add(new Bullet());
-    shotTimer = 0;
-  }
-  
     //COLLISION WITH ASTEROID/UFO/UFOBULLET
     if (invincible == false) {
     int i = 0;
@@ -120,7 +105,23 @@ class Spaceship extends GameObject{
       lives = 3;
       score = 0; 
     }
-    
+
+  //ROTATE WHEN PRESSING A OR D KEYS 
+  if (akey) direction.rotate(-radians(5) );
+  if (dkey) direction.rotate(radians(5) );
+  //GO FORWARD/BACKWARDS WHEN PRESSING W OR S KEYS
+  if (wkey) { 
+    velocity.add(direction);
+    myObjects.add(new Fire());
+    myObjects.add(new Fire());
+  }
+  if (skey) velocity.sub(direction);
+  //SHOOT BULLETS WHEN PRESSING SPACE KEY
+  if (spacekey && shotTimer >= threshold) {
+    myObjects.add(new Bullet());
+    shotTimer = 0;
+  }
+  
   //TELEPORTS WHEN OFFSCREEN
   if (location.x < -50) location.x = 850;
   if (location.x > 850) location.x = -50;
