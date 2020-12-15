@@ -18,7 +18,6 @@ color w = #FFFFFF; //white
 color lightblue = #68B2F8; //light blue
 color grey = #AAB3AB; //grey
 
-
 final int INTRO = 0;
 final int GAME = 1;
 final int PAUSE = 2;
@@ -27,6 +26,8 @@ final int WIN = 4;
 int mode = INTRO;
 
 PFont font;
+
+int spawnTimer;
 
 
 void setup() {
@@ -50,7 +51,7 @@ void setup() {
   myObjects.add(new Asteroid());
   myObjects.add(new Asteroid());
   
-  myObjects.add(new UFO());
+  spawnTimer = 500; 
 }
 
 

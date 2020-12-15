@@ -2,7 +2,7 @@ PImage nebula;
 
 void Win() {
   nebula = loadImage("nebula.jpg");
-  image(nebula, width/2, height/2, 1000, 1000);  
+  image(nebula, width/2, height/2, 2000, 1000);  
   
   //INSERT RESTART BUTTON
   button(400, 600, 260, 100, 30, "RESTART");  

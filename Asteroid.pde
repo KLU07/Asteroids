@@ -74,12 +74,9 @@ class Asteroid extends GameObject {
                 
     }
     
-    
-    
     if (myShip.score == 15) {
       mode = WIN;
     }
-    
     
   }
 }
